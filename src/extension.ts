@@ -1,16 +1,12 @@
 import * as vscode from 'vscode';
+import { relativeWithLineNumber } from "./path_with_line_number";
+import { relativeWithSymbols } from "./path_with_symbols";
+
 
 export function activate(context: vscode.ExtensionContext) {
-  const disposable = vscode.commands.registerTextEditorCommand(
-    'copy-relative-file-path-with-line.copy',
-    (editor) => {
-      const relativePath = vscode.workspace.asRelativePath(editor.document.uri);
-      const line = editor.selection.start.line + 1;
-      vscode.env.clipboard.writeText([relativePath, line].join(':'));
-    }
-  );
-
-  context.subscriptions.push(disposable);
+  context.subscriptions.push(relativeWithLineNumber);
+  context.subscriptions.push(relativeWithSymbols);
 }
+
 
 export function deactivate() {}

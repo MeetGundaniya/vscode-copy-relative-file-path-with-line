@@ -19,17 +19,37 @@
     "url": "https://github.com/aki77/vscode-copy-relative-file-path-with-line/issues"
   },
 	"activationEvents": [
-        "onCommand:copy-relative-file-path-with-line.copy"
+        "onCommand:copy-relative-file-path-with-line.copy",
+        "onCommand:copy-relative-file-path-with-symbols.copy"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "copy-relative-file-path-with-line.copy",
-				"title": "Copy relative file path with line number",
+				"title": "Copy Relative Path with Line Number",
+				"enablement": "editorIsOpen"
+			},
+            {
+				"command": "copy-relative-file-path-with-symbols.copy",
+				"title": "Copy Relative Path with Symbols",
 				"enablement": "editorIsOpen"
 			}
-		]
+		],
+        "menus": {
+            "editor/context/copy": [
+                {
+                "command": "copy-relative-file-path-with-line.copy",
+                "group": "9_cutcopypaste",
+                "when": "editorTextFocus"
+                },
+                {
+                "command": "copy-relative-file-path-with-symbols.copy",
+                "group": "9_cutcopypaste",
+                "when": "editorTextFocus"
+                }
+            ]
+        }
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
